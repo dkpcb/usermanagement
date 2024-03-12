@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package usermanagement;
+
+option go_package = "pkg/grpc";
+
+// ユーザー情報を表すメッセージ
+message User {
+  string id = 1;
+  string name = 2;
+}
+
+// ユーザー追加リクエスト
+message AddUserRequest {
+  User user = 1;
+}
+
+// ユーザー追加レスポンス
+message AddUserResponse {
+  string id = 1; // 追加されたユーザーのID
+}
+
+// ユーザー取得リクエスト
+message GetUserRequest {
+  string id = 1;
+}
+
+// ユーザー取得レスポンス
+message GetUserResponse {
+  User user = 1;
+}
+
+// ユーザー管理サービスの定義
+service UserManagementService {
+  // ユーザー追加
+  rpc AddUser(AddUserRequest) returns (AddUserResponse);
+  // ユーザー取得
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
