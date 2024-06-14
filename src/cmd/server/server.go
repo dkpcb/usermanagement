@@ -43,14 +43,13 @@ func main() {
 	}
 	s := grpc.NewServer()
 
-	// ここで、サービスをサーバーに登録します。
 	user_managementpb.RegisterUserManagementServiceServer(s, &server{users: make(map[string]*user_managementpb.User)})
 
-	// サーバーにリフレクションサービスを登録します。
 	reflection.Register(s)
 
-	// サーバーを起動します。
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }
+
+
